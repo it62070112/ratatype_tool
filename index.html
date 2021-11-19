@@ -24,7 +24,20 @@
                             .replaceAll('</span><span class=&quot;wblack&quot;>', '')
                         );
                     textarea_user_input = '::' + textarea_user_input.substring(42, (textarea_user_input.length - 14));
-                    textarea_user_input = textarea_user_input.replace(' ' ,'::');
+                    textarea_user_input = textarea_user_input.replace(' ' ,':: ');
+                    space_from_last_character_found = 0;
+                    space_from_last_character_position = -1;
+                    current_number = 0;
+                    while (space_from_last_character_found == 0) {
+                        if (textarea_user_input[(textarea_user_input.length - current_number)] != '') {
+                            current_number += 1;
+                        }
+                        if (textarea_user_input[(textarea_user_input.length - current_number)] == '') {
+                            space_from_last_character_position = current_number;
+                            space_from_last_character_found = 1;
+                        }
+                    }
+                    textarea_user_input = textarea_user_input.substring(0, (textarea_user_input.length - space_from_last_character_position));
                     console.log(textarea_user_input);
                     navigator.clipboard.writeText(textarea_user_input);
                 }
