@@ -25,29 +25,24 @@
                         );
                     textarea_user_input = '::' + textarea_user_input.substring(42, (textarea_user_input.length - 14));
                     textarea_user_input = textarea_user_input.replace(' ' ,':: ');
-                    space_from_last_character_found = 0;
-                    space_from_last_character_position = -1;
-                    current_number = 0;
-                    while (space_from_last_character_found == 0) {
-                        console.log(
-                            'current_number: ' + current_number
-                            + ', ' + '\'' + textarea_user_input[(textarea_user_input.length - current_number)] +  '\''
-                            + 'is space: ' + '\'' + (textarea_user_input[(textarea_user_input.length - current_number)] == ' ') +  '\''
-                        )
-                        if (textarea_user_input[(textarea_user_input.length - current_number)] == ' ') {
-                            console.log('<><><>');
-                            space_from_last_character_position = current_number;
-                            space_from_last_character_found = 1;
+                    num = 0;
+                    should_stop = 0;
+                    while (should_stop == 0) {
+                        if ((num + 1) < 20) {
+                            if (textarea_user_input[(textarea_user_input.length - (num + 1))] == ' ') {
+                                should_stop = 1;
+                            }
+                            num += 1;
                         }
-                        if (textarea_user_input[(textarea_user_input.length - current_number)] != ' ') {
-                            current_number += 1;
-                        }
-                        if (current_number > 20) {
-                            space_from_last_character_found = 1;;
+                        if ((num + 1) == 20) {
+                            console.log(num);
+                            should_stop = 1;
                         }
                     }
-                    textarea_user_input = textarea_user_input.substring(0, (textarea_user_input.length - space_from_last_character_position));
-                    console.log(textarea_user_input);
+                    textarea_user_input = textarea_user_input.substring(
+                        0, (textarea_user_input.length - num)
+                    )
+                    console.log('\'' + textarea_user_input + '\'');
                     navigator.clipboard.writeText(textarea_user_input);
                 }
             )();
