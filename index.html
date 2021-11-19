@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ratatype_tool</title>
+</head>
+<body>
+    <textarea
+        rows="10"
+        cols="50"
+        id='textarea_user_input'
+    ></textarea>
+    <br>
+    <button
+        onclick="
+            (
+                function () {
+                    let textarea_user_input = (
+                        document
+                            .getElementById('textarea_user_input')
+                            .value
+                            .replaceAll('</span><span class=&quot;wblack&quot;>', '')
+                        );
+                    textarea_user_input = '::' + textarea_user_input.substring(42, (textarea_user_input.length - 14));
+                    textarea_user_input = textarea_user_input.replace(' ' ,'::');
+                    console.log(textarea_user_input);
+                    navigator.clipboard.writeText(textarea_user_input);
+                }
+            )();
+            return false;
+        "
+    >
+        submit
+    </button>
+</body>
+</html>
